@@ -13,6 +13,8 @@ create table users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO users(first_name ,last_name , birthday , email , password ) VALUES ('fakhrddine' , 'largou' , '02/12/2004' , 'largou@gmail.com' , 'lalapapa' );
+
 create table categories(
     id SERIAL primary key ,
     description VARCHAR(250) NOT null,
