@@ -6,14 +6,17 @@ create table users (
     id SERIAL PRIMARY key , 
     first_name VARCHAR(50) NOT NULL ,
     last_name  VARCHAR(50) not null ,
-    birthday date NOT NULL ,
+    age int  NOT NULL ,
     email VARCHAR(150) NOT NULL UNIQUE,
     password VARCHAR(150) NOT null,
     status VARCHAR(20) DEFAULT 'active',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users(first_name ,last_name , birthday , email , password ) VALUES ('fakhrddine' , 'largou' , '02/12/2004' , 'largou@gmail.com' , 'lalapapa' );
+
+-- DROP Table users CASCADE;
+
+INSERT INTO users(first_name ,last_name , age , email , password ) VALUES ('fakhrddine' , 'largou' , '19' , 'largou@gmail.com' , 'lalapapa' );
 
 create table categories(
     id SERIAL primary key ,
