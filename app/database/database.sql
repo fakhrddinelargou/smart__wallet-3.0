@@ -40,9 +40,6 @@ create table cards (
 )
 
 
-DROP TABLE cards;
-
-
 create table incomes(
     id SERIAL PRIMARY KEY,
     description VARCHAR(250) NULL,

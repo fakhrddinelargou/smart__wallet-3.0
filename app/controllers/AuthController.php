@@ -17,6 +17,10 @@ class AuthController extends Controller{
   // $this->password = $password ;
   // }
 
+    public function index(){
+   $this->view("auth/login");
+  }
+
   public function register(){
    $this->view("auth/register");
   } 
@@ -30,12 +34,11 @@ class AuthController extends Controller{
     $last_name = $_POST['last_name'];
     $age = $_POST['age'];
     $password = $_POST['password'];
-    echo $email ."/". $first_name ."/". $last_name ."/" . $age."/" . $password;
-    // $storeUser = new User();
-    $storeUser = new User($first_name,$last_name,$email,$password,$age);
+    $storeUser = new User();
+    $existingEmail = $storeUser->setEmail($email);
     $existingEmail = $storeUser->getEmail();
     if(!$existingEmail){
-    $existingEmail = $storeUser->setUser();
+    $existingEmail = $storeUser->setUser($first_name,$last_name,$email,$password,$age);
     header("Location: /?path=auth/login");
     exit;
     }else{
@@ -44,6 +47,33 @@ class AuthController extends Controller{
     }
   }
 
+  public function connect(){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $loginUser = new User();
+    $setEmail = $loginUser->setEmail($email);
+    $existingEmail = $loginUser->getEmail();
+    if($existingEmail){
+       
+     $verification = $loginUser->login($password);
+     echo $verification;
+     if($verification){
+      $_SESSION['user_id'] = $existingEmail['id'];
+      header("Location: /?path=layout/app");
+      exit;
+     }else{
+      $_SESSION['mode'] = "password";
+      header("Location: /?path=auth/login");
+      exit;
+     }
+ 
+  }else{
+       $_SESSION['mode'] = "errorEmail";
+      header("Location: /?path=auth/login");
+      exit;
+  }
+
+  }
 
 
 }
